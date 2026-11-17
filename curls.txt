@@ -1,0 +1,21 @@
+# CRUD Lanchonete - exemplos de curl
+# Base URL: http://localhost:8080
+
+# Listar todas as lanchonetes
+curl -X GET http://localhost:8080/api/lanchonetes
+
+# Buscar lanchonete por ID
+curl -X GET http://localhost:8080/api/lanchonetes/1
+
+# Criar lanchonete
+curl -X POST http://localhost:8080/api/lanchonetes ^
+  -H "Content-Type: application/json" ^
+  -d "{\"nome\":\"Burger House\",\"endereco\":\"Rua das Flores, 100\",\"cidade\":\"Sao Paulo\"}"
+
+# Atualizar lanchonete
+curl -X PUT http://localhost:8080/api/lanchonetes/1 ^
+  -H "Content-Type: application/json" ^
+  -d "{\"nome\":\"Burger House Premium\",\"endereco\":\"Av. Paulista, 1000\",\"cidade\":\"Sao Paulo\"}"
+
+# Excluir lanchonete
+curl -X DELETE http://localhost:8080/api/lanchonetes/1
