@@ -3,88 +3,135 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lanchonete — Gestão</title>
+  <title>Lanchonete</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=dark2">
 </head>
 <body>
-  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="backdrop" aria-hidden="true">
+    <img
+      class="backdrop-photo"
+      src="/images/hero.jpg"
+      alt=""
+      width="1400"
+      height="900"
+      decoding="async"
+    >
+    <span class="backdrop-shade"></span>
+  </div>
 
-  <header class="top">
-    <div class="brand">
-      <span class="brand-mark" aria-hidden="true"></span>
-      <div>
-        <p class="brand-name">Lanchonete</p>
-        <p class="brand-tag">painel de cadastro</p>
+  <div class="page">
+    <header class="header">
+      <div class="header-brand">
+        <h1>Lanchonete</h1>
+        <p><span id="totalCount">0</span> unidades</p>
       </div>
-    </div>
-    <p class="status" id="statusMsg" role="status"></p>
-  </header>
+      <p class="status" id="statusMsg" role="status"></p>
+    </header>
 
-  <main class="layout">
-    <section class="panel form-panel" aria-labelledby="form-title">
-      <div class="panel-head">
-        <h1 id="form-title">Nova lanchonete</h1>
-        <p id="form-subtitle">Preencha os dados e salve no cadastro.</p>
-      </div>
-
-      <form id="lanchoneteForm" novalidate>
-        <input type="hidden" id="id" name="id">
-
-        <label class="field">
-          <span>Nome</span>
-          <input type="text" id="nome" name="nome" placeholder="Ex.: Burger da Esquina" required maxlength="120" autocomplete="organization">
-        </label>
-
-        <label class="field">
-          <span>Endereço</span>
-          <input type="text" id="endereco" name="endereco" placeholder="Rua, número e bairro" required maxlength="200" autocomplete="street-address">
-        </label>
-
-        <label class="field">
-          <span>Cidade</span>
-          <input type="text" id="cidade" name="cidade" placeholder="Ex.: São Paulo" required maxlength="100" autocomplete="address-level2">
-        </label>
-
-        <div class="actions">
-          <button type="submit" class="btn btn-primary" id="btnSalvar">Salvar</button>
-          <button type="button" class="btn btn-ghost" id="btnCancelar" hidden>Cancelar edição</button>
-        </div>
-      </form>
+    <section class="bites" aria-label="Destaques">
+      <figure class="bite">
+        <img src="/images/burger.jpg" alt="Hambúrguer artesanal" width="240" height="160" loading="lazy" decoding="async">
+      </figure>
+      <figure class="bite">
+        <img src="/images/sandwich.jpg" alt="Sanduíche" width="240" height="160" loading="lazy" decoding="async">
+      </figure>
+      <figure class="bite">
+        <img src="/images/cheese.jpg" alt="Lanche com queijo" width="240" height="160" loading="lazy" decoding="async">
+      </figure>
+      <figure class="bite bite-hide-mobile">
+        <img src="/images/hotdog.jpg" alt="Hot dog" width="240" height="160" loading="lazy" decoding="async">
+      </figure>
     </section>
 
-    <section class="panel list-panel" aria-labelledby="list-title">
-      <div class="panel-head row">
-        <div>
-          <h2 id="list-title">Cadastro</h2>
-          <p><span id="totalCount">0</span> registro(s)</p>
+    <main class="grid" id="cadastro">
+      <section class="panel" aria-labelledby="form-title">
+        <p class="label" id="form-mode-label">Novo</p>
+        <h2 id="form-title">Cadastrar</h2>
+        <p class="hint" id="form-subtitle">Nome, endereço e cidade.</p>
+
+        <form id="lanchoneteForm" novalidate>
+          <input type="hidden" id="id" name="id">
+
+          <label class="field">
+            <span>Nome</span>
+            <input type="text" id="nome" name="nome" placeholder="Burger da Esquina" required maxlength="120" autocomplete="organization">
+          </label>
+
+          <label class="field">
+            <span>Endereço</span>
+            <input type="text" id="endereco" name="endereco" placeholder="Rua e número" required maxlength="200" autocomplete="street-address">
+          </label>
+
+          <label class="field">
+            <span>Cidade</span>
+            <input type="text" id="cidade" name="cidade" placeholder="São Paulo" required maxlength="100" autocomplete="address-level2">
+          </label>
+
+          <div class="actions">
+            <button type="submit" class="btn btn-primary" id="btnSalvar"><span>Salvar</span></button>
+            <button type="button" class="btn" id="btnCancelar" hidden>Cancelar</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel panel-wide" aria-labelledby="list-title">
+        <div class="panel-top">
+          <div>
+            <h2 id="list-title">Unidades</h2>
+            <p class="hint subtle" id="shownHint"><span id="shownCount">0</span> na lista</p>
+          </div>
+          <div class="panel-tools">
+            <input type="search" id="busca" class="search" placeholder="Buscar" autocomplete="off" aria-label="Buscar">
+            <button type="button" class="btn" id="btnAtualizar">Atualizar</button>
+          </div>
         </div>
-        <button type="button" class="btn btn-ghost" id="btnAtualizar">Atualizar</button>
-      </div>
 
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nome</th>
-              <th>Endereço</th>
-              <th>Cidade</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody id="tabelaBody">
-            <tr class="empty-row">
-              <td colspan="5">Nenhuma lanchonete cadastrada ainda.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-  </main>
+        <div class="list" id="tableWrap" data-state="loading">
+          <div class="skeleton" aria-hidden="true">
+            <div class="sk"></div>
+            <div class="sk"></div>
+            <div class="sk"></div>
+          </div>
 
-  <script src="/js/app.js"></script>
+          <table class="units-table">
+            <thead>
+              <tr>
+                <th>Unidade</th>
+                <th>Endereço</th>
+                <th>Cidade</th>
+                <th class="col-actions"></th>
+              </tr>
+            </thead>
+            <tbody id="tabelaBody"></tbody>
+          </table>
+
+          <div class="empty" id="emptyState" hidden>
+            <img src="/images/plate.jpg" alt="" width="120" height="80" loading="lazy" decoding="async">
+            <p>Nenhuma unidade ainda.</p>
+          </div>
+
+          <div class="empty" id="emptySearch" hidden>
+            <p>Nada na busca.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog class="dialog" id="confirmDialog" aria-labelledby="confirm-title">
+    <form method="dialog">
+      <h3 id="confirm-title">Excluir?</h3>
+      <p id="confirm-text"></p>
+      <div class="actions actions-end">
+        <button type="submit" value="cancel" class="btn">Voltar</button>
+        <button type="submit" value="confirm" class="btn btn-danger">Excluir</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="/js/app.js?v=dark2"></script>
 </body>
 </html>
