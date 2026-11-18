@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — Lanchonete OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/login.css">
+</head>
+<body class="login-body">
+  <main class="login-shell">
+    <section class="login-hero">
+      <div class="logo">
+        <span class="logo-mark"></span>
+        <div class="logo-text">
+          <strong>Lanchonete</strong>
+          <span>Operating System</span>
+        </div>
+      </div>
+      <h1>Gestão segura da sua operação</h1>
+      <p>Controle acessos, pedidos e cardápio em um painel profissional.</p>
+    </section>
+
+    <section class="login-card card">
+      <div class="login-tabs" role="tablist">
+        <button type="button" class="is-active" data-tab="login" role="tab" aria-selected="true">Entrar</button>
+        <button type="button" data-tab="criar" role="tab" aria-selected="false">Criar conta</button>
+        <button type="button" data-tab="recuperar" role="tab" aria-selected="false">Recuperar</button>
+        <button type="button" data-tab="redefinir" role="tab" aria-selected="false">Redefinir</button>
+      </div>
+
+      <form id="formLogin" class="form-grid login-pane is-active" data-pane="login">
+        <h2>Acesse sua conta</h2>
+        <label class="field"><span>Usuário</span><input name="username" required autocomplete="username" placeholder="admin"></label>
+        <label class="field"><span>Senha</span><input name="senha" type="password" required autocomplete="current-password" placeholder="••••••••"></label>
+        <button class="btn btn-primary" type="submit">Entrar</button>
+        <p class="muted">Padrão inicial: <strong>admin / admin123</strong></p>
+      </form>
+
+      <form id="formCriar" class="form-grid login-pane" data-pane="criar" hidden>
+        <h2>Criar conta</h2>
+        <label class="field"><span>Nome completo</span><input name="nomeCompleto" required maxlength="120"></label>
+        <div class="form-grid two">
+          <label class="field"><span>CPF</span><input name="cpf" required placeholder="somente números" maxlength="14"></label>
+          <label class="field"><span>Telefone</span><input name="telefone" maxlength="30"></label>
+        </div>
+        <label class="field"><span>E-mail</span><input name="email" type="email" required maxlength="120"></label>
+        <label class="field"><span>Usuário (login)</span><input name="username" required maxlength="60" autocomplete="username"></label>
+        <div class="form-grid two">
+          <label class="field"><span>Senha</span><input name="senha" type="password" required minlength="6" autocomplete="new-password"></label>
+          <label class="field"><span>Confirmar senha</span><input name="confirmarSenha" type="password" required minlength="6" autocomplete="new-password"></label>
+        </div>
+        <button class="btn btn-primary" type="submit">Criar conta</button>
+        <p class="muted">A conta é criada com perfil de usuário padrão.</p>
+      </form>
+
+      <form id="formRecuperar" class="form-grid login-pane" data-pane="recuperar" hidden>
+        <h2>Recuperar senha</h2>
+        <label class="field"><span>E-mail cadastrado</span><input name="email" type="email" required placeholder="voce@email.com"></label>
+        <button class="btn btn-primary" type="submit">Enviar instruções</button>
+      </form>
+
+      <form id="formRedefinir" class="form-grid login-pane" data-pane="redefinir" hidden>
+        <h2>Redefinir senha</h2>
+        <label class="field"><span>Token</span><input name="token" required></label>
+        <label class="field"><span>Nova senha</span><input name="novaSenha" type="password" required minlength="6"></label>
+        <label class="field"><span>Confirmar senha</span><input name="confirmarSenha" type="password" required minlength="6"></label>
+        <button class="btn btn-primary" type="submit">Salvar nova senha</button>
+      </form>
+
+      <p class="login-msg" id="loginMsg" role="status"></p>
+    </section>
+  </main>
+  <script src="/js/login.js"></script>
+</body>
+</html>

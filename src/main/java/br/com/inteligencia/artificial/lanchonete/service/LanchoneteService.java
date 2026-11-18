@@ -6,15 +6,18 @@ import br.com.inteligencia.artificial.lanchonete.repository.LanchoneteRepository
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class LanchoneteService {
 
 	private final LanchoneteRepository lanchoneteRepository;
+	private final LancheService lancheService;
 
-	public LanchoneteService(LanchoneteRepository lanchoneteRepository) {
+	public LanchoneteService(LanchoneteRepository lanchoneteRepository, LancheService lancheService) {
 		this.lanchoneteRepository = lanchoneteRepository;
+		this.lancheService = lancheService;
 	}
 
 	public List<LanchoneteDTO> listarTodas() {
@@ -44,10 +47,12 @@ public class LanchoneteService {
 		return paraDTO(atualizada);
 	}
 
+	@Transactional
 	public void deletar(Long id) {
 		if (!lanchoneteRepository.existsById(id)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lanchonete não encontrada");
 		}
+		lancheService.deletarPorLanchonete(id);
 		lanchoneteRepository.deleteById(id);
 	}
 

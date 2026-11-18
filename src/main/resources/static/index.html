@@ -3,135 +3,167 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lanchonete</title>
+  <title>Lanchonete OS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/styles.css?v=dark2">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-  <div class="backdrop" aria-hidden="true">
-    <img
-      class="backdrop-photo"
-      src="/images/hero.jpg"
-      alt=""
-      width="1400"
-      height="900"
-      decoding="async"
-    >
-    <span class="backdrop-shade"></span>
-  </div>
-
-  <div class="page">
-    <header class="header">
-      <div class="header-brand">
-        <h1>Lanchonete</h1>
-        <p><span id="totalCount">0</span> unidades</p>
-      </div>
-      <p class="status" id="statusMsg" role="status"></p>
-    </header>
-
-    <section class="bites" aria-label="Destaques">
-      <figure class="bite">
-        <img src="/images/burger.jpg" alt="Hambúrguer artesanal" width="240" height="160" loading="lazy" decoding="async">
-      </figure>
-      <figure class="bite">
-        <img src="/images/sandwich.jpg" alt="Sanduíche" width="240" height="160" loading="lazy" decoding="async">
-      </figure>
-      <figure class="bite">
-        <img src="/images/cheese.jpg" alt="Lanche com queijo" width="240" height="160" loading="lazy" decoding="async">
-      </figure>
-      <figure class="bite bite-hide-mobile">
-        <img src="/images/hotdog.jpg" alt="Hot dog" width="240" height="160" loading="lazy" decoding="async">
-      </figure>
-    </section>
-
-    <main class="grid" id="cadastro">
-      <section class="panel" aria-labelledby="form-title">
-        <p class="label" id="form-mode-label">Novo</p>
-        <h2 id="form-title">Cadastrar</h2>
-        <p class="hint" id="form-subtitle">Nome, endereço e cidade.</p>
-
-        <form id="lanchoneteForm" novalidate>
-          <input type="hidden" id="id" name="id">
-
-          <label class="field">
-            <span>Nome</span>
-            <input type="text" id="nome" name="nome" placeholder="Burger da Esquina" required maxlength="120" autocomplete="organization">
-          </label>
-
-          <label class="field">
-            <span>Endereço</span>
-            <input type="text" id="endereco" name="endereco" placeholder="Rua e número" required maxlength="200" autocomplete="street-address">
-          </label>
-
-          <label class="field">
-            <span>Cidade</span>
-            <input type="text" id="cidade" name="cidade" placeholder="São Paulo" required maxlength="100" autocomplete="address-level2">
-          </label>
-
-          <div class="actions">
-            <button type="submit" class="btn btn-primary" id="btnSalvar"><span>Salvar</span></button>
-            <button type="button" class="btn" id="btnCancelar" hidden>Cancelar</button>
+  <div class="app" id="app">
+    <aside class="sidebar" id="sidebar" aria-label="Navegação">
+      <div class="sidebar-top">
+        <div class="logo">
+          <span class="logo-mark" aria-hidden="true"></span>
+          <div class="logo-text">
+            <strong>Lanchonete</strong>
+            <span>Operating System</span>
           </div>
-        </form>
-      </section>
+        </div>
+        <button type="button" class="collapse-btn" id="btnCollapse" aria-label="Recolher menu" title="Recolher">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+      </div>
 
-      <section class="panel panel-wide" aria-labelledby="list-title">
-        <div class="panel-top">
+      <nav class="nav">
+        <p class="nav-section" data-i18n="navOperacao">Operação</p>
+        <button class="nav-link is-active" data-route="dashboard">
+          <svg viewBox="0 0 24 24"><path d="M4 13h6V4H4v9zm0 7h6v-5H4v5zm10 0h6V11h-6v9zm0-16v5h6V4h-6z"/></svg>
+          <span data-i18n="dashboard">Início</span>
+        </button>
+        <button class="nav-link" data-route="pedidos">
+          <svg viewBox="0 0 24 24"><path d="M7 4h10l1 4H6l1-4zm-1 6h12v10H6V10zm3 2v6m6-6v6"/></svg>
+          <span data-i18n="pedidos">Pedidos</span>
+        </button>
+        <button class="nav-link" data-route="cardapio">
+          <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+          <span data-i18n="cardapio">Cardápio</span>
+        </button>
+        <button class="nav-link" data-route="produtos">
+          <svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7l8-4z"/></svg>
+          <span data-i18n="produtos">Produtos</span>
+        </button>
+        <button class="nav-link" data-route="categorias">
+          <svg viewBox="0 0 24 24"><path d="M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7zm9 0h7v7h-7v-7z"/></svg>
+          <span data-i18n="categorias">Categorias</span>
+        </button>
+
+        <p class="nav-section" data-i18n="navGestao">Gestão</p>
+        <button class="nav-link" data-route="lanchonetes">
+          <svg viewBox="0 0 24 24"><path d="M3 10l9-7 9 7v9a2 2 0 01-2 2H5a2 2 0 01-2-2v-9z"/></svg>
+          <span data-i18n="lanchonetes">Lanchonetes</span>
+        </button>
+        <button class="nav-link" data-route="clientes">
+          <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zm13 10v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          <span data-i18n="clientes">Clientes</span>
+        </button>
+        <button class="nav-link" data-route="relatorios">
+          <svg viewBox="0 0 24 24"><path d="M4 19V5m4 14V9m4 10V7m4 12v-6m4 6V4"/></svg>
+          <span data-i18n="relatorios">Relatórios</span>
+        </button>
+        <button class="nav-link" data-route="usuarios" data-modulo="USUARIOS">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          <span data-i18n="usuarios">Usuários</span>
+        </button>
+        <button class="nav-link" data-route="configuracoes">
+          <svg viewBox="0 0 24 24"><path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/><path d="M19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9c0 .7.4 1.3 1 1.5H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg>
+          <span data-i18n="configuracoes">Configurações</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-foot">
+        <div class="unit-chip" id="unitChip">
+          <span class="unit-dot"></span>
           <div>
-            <h2 id="list-title">Unidades</h2>
-            <p class="hint subtle" id="shownHint"><span id="shownCount">0</span> na lista</p>
+            <strong id="unitName">Selecione a unidade</strong>
+            <small id="unitMeta">Contexto operacional</small>
           </div>
-          <div class="panel-tools">
-            <input type="search" id="busca" class="search" placeholder="Buscar" autocomplete="off" aria-label="Buscar">
-            <button type="button" class="btn" id="btnAtualizar">Atualizar</button>
+        </div>
+      </div>
+    </aside>
+
+    <div class="shell">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button type="button" class="icon-btn mobile-only" id="btnMenu" aria-label="Abrir menu">
+            <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+          <div>
+            <div class="breadcrumbs" id="breadcrumbs">Operação / Início</div>
+            <h1 id="pageTitle">Início</h1>
           </div>
         </div>
 
-        <div class="list" id="tableWrap" data-state="loading">
-          <div class="skeleton" aria-hidden="true">
-            <div class="sk"></div>
-            <div class="sk"></div>
-            <div class="sk"></div>
+        <div class="topbar-right">
+          <label class="search">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+            <input type="search" id="globalSearch" data-i18n-placeholder="searchPlaceholder" placeholder="Buscar pedidos, produtos, clientes...">
+          </label>
+          <div class="notif-wrap">
+            <button type="button" class="icon-btn" id="btnNotif" aria-label="Notificações" aria-expanded="false">
+              <svg viewBox="0 0 24 24"><path d="M6 9a6 6 0 0112 0c0 7 3 7 3 7H3s3 0 3-7"/><path d="M10 19a2 2 0 004 0"/></svg>
+              <span class="badge" id="notifBadge" hidden>0</span>
+            </button>
+            <div class="notif-panel card" id="notifPanel" hidden>
+              <div class="notif-head">
+                <strong data-i18n="notifications">Notificações</strong>
+                <button type="button" class="btn btn-ghost btn-sm" id="btnNotifPedidos" data-i18n="viewOrders">Ver pedidos</button>
+              </div>
+              <div id="notifList" class="list-soft"></div>
+            </div>
           </div>
-
-          <table class="units-table">
-            <thead>
-              <tr>
-                <th>Unidade</th>
-                <th>Endereço</th>
-                <th>Cidade</th>
-                <th class="col-actions"></th>
-              </tr>
-            </thead>
-            <tbody id="tabelaBody"></tbody>
-          </table>
-
-          <div class="empty" id="emptyState" hidden>
-            <img src="/images/plate.jpg" alt="" width="120" height="80" loading="lazy" decoding="async">
-            <p>Nenhuma unidade ainda.</p>
-          </div>
-
-          <div class="empty" id="emptySearch" hidden>
-            <p>Nada na busca.</p>
+          <div class="profile-wrap">
+            <button type="button" class="profile-btn" id="btnProfile" aria-haspopup="true" aria-expanded="false">
+              <span class="avatar" id="avatarInicials">LC</span>
+              <span class="profile-meta">
+                <strong id="profileName">Operador</strong>
+                <small id="profileRole">Admin</small>
+              </span>
+            </button>
+            <div class="profile-menu card" id="profileMenu" hidden>
+              <button type="button" data-action="senha" data-i18n="changePassword">Alterar senha</button>
+              <button type="button" data-action="usuarios" data-admin-only data-i18n="usuarios">Usuários</button>
+              <button type="button" data-action="logout" data-i18n="logout">Sair</button>
+            </div>
           </div>
         </div>
-      </section>
-    </main>
+      </header>
+
+      <main class="content" id="content">
+        <!-- views injected/toggled by app.js -->
+        <section class="view is-active" data-view="dashboard" id="view-dashboard"></section>
+        <section class="view" data-view="pedidos" id="view-pedidos" hidden></section>
+        <section class="view" data-view="cardapio" id="view-cardapio" hidden></section>
+        <section class="view" data-view="produtos" id="view-produtos" hidden></section>
+        <section class="view" data-view="categorias" id="view-categorias" hidden></section>
+        <section class="view" data-view="lanchonetes" id="view-lanchonetes" hidden></section>
+        <section class="view" data-view="clientes" id="view-clientes" hidden></section>
+        <section class="view" data-view="relatorios" id="view-relatorios" hidden></section>
+        <section class="view" data-view="usuarios" id="view-usuarios" hidden></section>
+        <section class="view" data-view="configuracoes" id="view-configuracoes" hidden></section>
+      </main>
+    </div>
   </div>
 
-  <dialog class="dialog" id="confirmDialog" aria-labelledby="confirm-title">
-    <form method="dialog">
-      <h3 id="confirm-title">Excluir?</h3>
-      <p id="confirm-text"></p>
-      <div class="actions actions-end">
-        <button type="submit" value="cancel" class="btn">Voltar</button>
-        <button type="submit" value="confirm" class="btn btn-danger">Excluir</button>
-      </div>
-    </form>
-  </dialog>
+  <div class="backdrop" id="backdrop" hidden aria-hidden="true"></div>
 
-  <script src="/js/app.js?v=dark2"></script>
+  <div class="modal" id="modal" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2 id="modalTitle">Modal</h2>
+        <button type="button" class="icon-btn" id="modalClose" aria-label="Fechar">
+          <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-foot" id="modalFoot"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/i18n.js"></script>
+  <script src="/js/app.js"></script>
 </body>
 </html>
